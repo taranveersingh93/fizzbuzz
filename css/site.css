@@ -5,6 +5,7 @@
     --ts-dark-color: #1b1b1b;
     --ts-primary-color: hsl(210, 17%, 18%);
     --ts-secondary-color: hsl(210, 17%, 95%);
+    --ts-tertiary-color: hsl(210, 17%, 30%);
 }
 
 html, body {
@@ -53,8 +54,30 @@ footer .bi:hover {
 
 .app-logo {
     max-width: 400px;
+    border-radius: 12px;
 }
 
 :not(pre) > code[class*="language-"], pre[class*="language-"] {
     background: var(--ts-primary-color);
 }
+
+.btn-primary {
+    --bs-btn-bg: var(--ts-primary-color);
+    --bs-btn-border-color: var(--ts-primary-color);
+    --bs-btn-hover-bg: var(--ts-tertiary-color);
+    --bs-btn-hover-border-color: var(--ts-tertiary-color);
+    --bs-btn-active-bg: var(--ts-tertiary-color);
+    --bs-btn-disabled-bg: var(--ts-primary-color);
+    --bs-btn-disabled-border-color: var(--ts-primary-color);
+  }
+
+  .btn-outline-primary {
+    --bs-btn-color: var(--ts-primary-color);
+    --bs-btn-border-color: var(--ts-primary-color);
+    --bs-btn-hover-bg: var(--ts-primary-color);
+    --bs-btn-hover-border-color: var(--ts-primary-color);
+    --bs-btn-active-bg: var(--ts-primary-color);
+    --bs-btn-active-border-color: var(--ts-primary-color);
+    --bs-btn-disabled-color: var(--ts-primary-color);
+    --bs-btn-disabled-border-color: var(--ts-primary-color);
+  }
