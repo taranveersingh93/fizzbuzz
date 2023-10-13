@@ -77,6 +77,10 @@ td {
     --bs-table-bg: #ff993b;
 }
 
+div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
+    background-color: #ff993b;
+}
+
 .btn-primary {
     --bs-btn-bg: var(--ts-primary-color);
     --bs-btn-border-color: var(--ts-primary-color);
