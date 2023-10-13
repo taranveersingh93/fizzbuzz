@@ -70,11 +70,11 @@ td {
   }
   
 .table-light {
-    --bs-table-bg: #dcdcdc
+    --bs-table-bg: #dcdcdc;
 }
 
 .table-primary {
-    --bs-table-bg: #ff993b
+    --bs-table-bg: #ff993b;
 }
 
 .btn-primary {
@@ -90,12 +90,16 @@ td {
   .btn-outline-primary {
     --bs-btn-color: var(--ts-primary-color);
     --bs-btn-border-color: var(--ts-primary-color);
-    --bs-btn-hover-bg: var(--ts-primary-color);
+    --bs-btn-hover-bg: #ff993b;
     --bs-btn-hover-border-color: var(--ts-primary-color);
     --bs-btn-active-bg: var(--ts-primary-color);
     --bs-btn-active-border-color: var(--ts-primary-color);
     --bs-btn-disabled-color: var(--ts-primary-color);
     --bs-btn-disabled-border-color: var(--ts-primary-color);
+  }
+
+  .btn-dark {
+    --bs-btn-hover-bg: #ff993b;
   }
 
   .instructions-btn, .instructionsBox {
