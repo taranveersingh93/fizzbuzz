@@ -61,8 +61,20 @@ footer .bi:hover {
     background: var(--ts-primary-color);
 }
 
-#btnSubmit {
-    width: 100%;
+td {
+    width: 20%;
+}
+
+.table-dark {
+    --bs-table-bg: #555555;
+  }
+  
+.table-light {
+    --bs-table-bg: #dcdcdc
+}
+
+.table-primary {
+    --bs-table-bg: #ff993b
 }
 
 .btn-primary {
