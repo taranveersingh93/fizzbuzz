@@ -69,16 +69,133 @@
 					<!-- pre formatted text. indents and spacing will be preserved -->
 					<pre class="line-numbers">
 						<code class="language-js">
-const displayMessage = () => {
-	const msg = document.getElementById("message").value;
+// Helper Functions
+
+const getFirstFizzBuzz = (fizz, buzz) => {
+	let smallerNum = buzz;
+	if (buzz > fizz) {
+		smallerNum = fizz;
+	}
+
+	for (let i = smallerNum; i <= fizz * buzz; i++) {
+		if (i % fizz === 0 && i % buzz === 0) {
+			return i;
+		}
+	}
+}
+
+const getClass = input => {
+	if (input === "FizzBuzz") {
+		return "table-primary";
+	} else if (input === "Fizz") {
+		return "table-light";
+	} else if (input === "Buzz") {
+		return "table-dark";
+	} else {
+		return "";
+	}
+}
+
+const displayError = (error) => {
 	Swal.fire(
 		{
 			backdrop: false,
-			title: 'App Name',
-			text: msg
+			title: 'Oh no',
+			text: error,
+			icon: "error"
 		}
 	);
 }
+
+const checkInputValidity = (stop, fizz, buzz) => {
+	const allNumbers = Number.isInteger(stop) && Number.isInteger(fizz) && Number.isInteger(buzz);
+	const firstFizzBuzz = getFirstFizzBuzz(fizz, buzz);
+	const minimumStop = stop >= firstFizzBuzz;
+	const positiveNums = fizz > 0 && buzz > 0;
+	const uniqueNums = fizz !== buzz;
+
+	if (!allNumbers) {
+		displayError("Please enter numerical values.");
+	}
+
+	if (!minimumStop) {
+		displayError(`The stop value should atleast be ${firstFizzBuzz}`);
+	} 
+
+	if (!positiveNums) {
+		displayError("The Fizz and Buzz value have to be greater than 0.");
+	}
+
+	if (!uniqueNums) {
+		displayError("Please enter different fizz and buzz values.")
+	}
+
+	return  allNumbers && minimumStop && positiveNums && uniqueNums;
+}
+
+//DOM functions
+
+const removeLogo = () => {
+	const fizzBuzzLogo = document.querySelector('.fizzbuzz-logo');
+	fizzBuzzLogo?.remove();
+}
+
+const generateFizzBuzz = (stop, fizz, buzz) => {
+	const output = [];
+	for (let i = 1; i <= stop; i++) {
+		if (i % fizz === 0 && i % buzz === 0) {
+			output.push("FizzBuzz");
+		} else if (i % fizz === 0) {
+			output.push("Fizz");
+		} else if (i % buzz === 0) {
+			output.push("Buzz");
+		} else {
+			output.push(i);
+		}
+	}
+	return output;
+}
+
+const getValues = () => {
+	const stopValue = parseInt(document.getElementById('stopValue').value);
+	const fizzValue = parseInt(document.getElementById('fizzValue').value);
+	const buzzValue = parseInt(document.getElementById('buzzValue').value);
+
+	if (checkInputValidity(stopValue, fizzValue, buzzValue)) {  
+		const generatedFizzBuzz = generateFizzBuzz(stopValue, fizzValue, buzzValue);
+		let rowLength;
+
+		if (fizzValue > buzzValue) {
+			rowLength = fizzValue;
+		} else {
+			rowLength = buzzValue;
+		}
+
+		displayFizzBuzz(generatedFizzBuzz, rowLength);
+	}
+}
+
+const displayFizzBuzz = (listFizzBuzz, rowLength) => {
+	let html = '';
+	for (let i = 0; i < listFizzBuzz.length; i++) {
+		if (i % rowLength === 0) {
+			html += '&lttr&gt';
+		}
+		
+		const tableData = listFizzBuzz[i];
+		const className = getClass(tableData);
+		
+		html += `&lttd class="${className}"&gt${tableData}&lt/td&gt`
+		
+		if (i % rowLength === rowLength - 1) {
+			html += '&lt/tr&gt';
+		}
+	};
+	removeLogo();
+	const displayTable = document.getElementById('results');
+	displayTable.innerHTML = html;
+}
+
 						</code>
 					</pre>
 				</div>

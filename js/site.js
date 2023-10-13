@@ -1,13 +1,4 @@
-const displayError = (error) => {
-    Swal.fire(
-        {
-            backdrop: false,
-            title: 'Oh no',
-            text: error,
-            icon: "error"
-        }
-    );
-}
+// Helper Functions
 
 const getFirstFizzBuzz = (fizz, buzz) => {
     let smallerNum = buzz;
@@ -20,6 +11,30 @@ const getFirstFizzBuzz = (fizz, buzz) => {
             return i;
         }
     }
+}
+
+const getClass = input => {
+    if (input === "FizzBuzz") {
+        return "table-primary";
+    } else if (input === "Fizz") {
+        return "table-light";
+    } else if (input === "Buzz") {
+        return "table-dark";
+    } else {
+        return "";
+    }
+}
+
+const displayError = (error) => {
+    Swal.fire(
+        {
+            backdrop: false,
+            title: 'Oh no',
+            text: error,
+            icon: "error",
+            confirmButtonColor: "#ff993b"
+        }
+    );
 }
 
 const checkInputValidity = (stop, fizz, buzz) => {
@@ -48,23 +63,11 @@ const checkInputValidity = (stop, fizz, buzz) => {
     return  allNumbers && minimumStop && positiveNums && uniqueNums;
 }
 
-const getValues = () => {
-    const stopValue = parseInt(document.getElementById('stopValue').value);
-    const fizzValue = parseInt(document.getElementById('fizzValue').value);
-    const buzzValue = parseInt(document.getElementById('buzzValue').value);
+//DOM functions
 
-    if (checkInputValidity(stopValue, fizzValue, buzzValue)) {  
-        const generatedFizzBuzz = generateFizzBuzz(stopValue, fizzValue, buzzValue);
-        let rowLength;
-
-        if (fizzValue > buzzValue) {
-            rowLength = fizzValue;
-        } else {
-            rowLength = buzzValue;
-        }
-
-        displayFizzBuzz(generatedFizzBuzz, rowLength);
-    }
+const removeLogo = () => {
+    const fizzBuzzLogo = document.querySelector('.fizzbuzz-logo');
+    fizzBuzzLogo?.remove();
 }
 
 const generateFizzBuzz = (stop, fizz, buzz) => {
@@ -80,24 +83,45 @@ const generateFizzBuzz = (stop, fizz, buzz) => {
             output.push(i);
         }
     }
-    
     return output;
 }
 
-const removeLogo = () => {
-    const fizzBuzzLogo = document.querySelector('.fizzbuzz-logo');
-    fizzBuzzLogo?.remove();
-}
+// Recursion alternative
 
-const getClass = input => {
-    if (input === "FizzBuzz") {
-        return "table-primary";
-    } else if (input === "Fizz") {
-        return "table-light";
-    } else if (input === "Buzz") {
-        return "table-dark";
-    } else {
-        return "";
+// const generateFizzBuzz = (stop, fizz, buzz, i) => {
+//     if (i > stop) {
+//         return [];
+//     }
+//     let currentEntry;
+//         if (i % fizz === 0 && i % buzz === 0) {
+//             currentEntry = "FizzBuzz";
+//         } else if (i % fizz === 0) {
+//             currentEntry = "Fizz";
+//         } else if (i % buzz === 0) {
+//             currentEntry = "Buzz";
+//         } else {
+//             currentEntry = i;
+//         }
+    
+//     return [currentEntry, ...generateFizzBuzz(stop, fizz, buzz, i + 1)];
+// }
+
+const getValues = () => {
+    const stopValue = parseInt(document.getElementById('stopValue').value);
+    const fizzValue = parseInt(document.getElementById('fizzValue').value);
+    const buzzValue = parseInt(document.getElementById('buzzValue').value);
+
+    if (checkInputValidity(stopValue, fizzValue, buzzValue)) {  
+        const generatedFizzBuzz = generateFizzBuzz(stopValue, fizzValue, buzzValue, 1);
+        let rowLength;
+
+        if (fizzValue > buzzValue) {
+            rowLength = fizzValue;
+        } else {
+            rowLength = buzzValue;
+        }
+
+        displayFizzBuzz(generatedFizzBuzz, rowLength);
     }
 }
 
@@ -111,7 +135,7 @@ const displayFizzBuzz = (listFizzBuzz, rowLength) => {
         const tableData = listFizzBuzz[i];
         const className = getClass(tableData);
         
-        html += `<td class="${className}">${tableData}</td>`
+        html += `<td style="width: ${100/rowLength}%" class="${className}">${tableData}</td>`
         
         if (i % rowLength === rowLength - 1) {
             html += '</tr>';
