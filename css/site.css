@@ -81,3 +81,34 @@ footer .bi:hover {
     --bs-btn-disabled-color: var(--ts-primary-color);
     --bs-btn-disabled-border-color: var(--ts-primary-color);
   }
+
+  .instructions-btn, .instructionsBox {
+    width: 100%;
+  }
+
+
+@media (min-width: 576px) { 
+    .instructions-btn, .instructionsBox {
+        width: 75%;
+      }
+    
+ }
+
+@media (min-width: 768px) { 
+
+    
+ }
+
+@media (min-width: 992px) { 
+    .instructions-btn {
+        width: 50%;
+      }
+ }
+
+@media (min-width: 1200px) { 
+    
+ }
+
+@media (min-width: 1400px) { 
+    
+ }

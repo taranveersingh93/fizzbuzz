@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>App Name: By Taranveer</title>
+		<title>FizzBuzz: By Taranveer</title>
 		<link rel="icon" type="image/x-icon" href="/Logos/black icon.svg" />
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -21,7 +21,7 @@
 			<div class="container-fluid">
 				<a class="navbar-brand" href="/index.html">
 					<img src="/Logos/white icon.svg" height="40" />
-					App Name
+					FizzBuzz
 				</a>
 				<button
 					class="navbar-toggler"
@@ -47,7 +47,7 @@
 						</li>
 						<li class="nav-item">
 							<!-- change to real repo link -->
-							<a class="nav-link" href="#">The Repo</a>
+							<a class="nav-link" target="_blank" href="https://github.com/taranveersingh93/fizzbuzz">The Repo</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" target="_blank" href="https://stirring-medovik-226616.netlify.app/">About</a>
@@ -62,9 +62,69 @@
 		</nav>
 
 		<main class="container py-3">
-			<h1>App UI GOES HERE</h1>
-			<input class="form-control my-3" placeholder="Enter a message" type="text" style="width: 12rem" id="message" name="message" />
-			<button class="btn btn-primary" id="btnSubmit" type="submit">Display Message</button>
+			<div class="text-center">
+				<button
+					class="btn btn-outline-primary instructions-btn fs-4"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#appInstructions"
+				>
+					App Instructions
+				</button>
+			</div>
+			<div class="collapse" id="appInstructions">
+				<div class="d-flex justify-content-center">
+					<div class="card instructionsBox fs-6 p-3" id="instructionsContent">
+						<p class="m-1">The app will generate all numbers from 1 to the "stop value" you enter.</p>
+						<p class="m-1">
+							All numbers divisible by "fizz value" and not "buzz value" will be replaced by the word "Fizz".
+						</p>
+						<p class="m-1">
+							All numbers divisible by "buzz value" and not "fizz value" will be replaced by the word "Buzz".
+						</p>
+						<p class="m-1">
+							All numbers divisible by both the "fizz value and "buzz value" will be replaced by the word "FizzBuzz".
+						</p>
+					</div>
+				</div>
+			</div>
+			<h2 class="border-bottom border-2 mt-3 lead text-center">Enter your values below</h2>
+			<div class="row">
+				<div class="col">
+					<form action="#" class="row g3">
+						<div class="col">
+							<label for="startValue" class="form-label">Start value</label>
+							<input
+								type="number"
+								placeholder="start number"
+								value="0"
+								class="form-control"
+								id="startValue"
+								name="startValue"
+							/>
+						</div>
+						<div class="col">
+							<label for="endValue" class="form-label">End value</label>
+							<input
+								type="number"
+								placeholder="end number"
+								value="100"
+								class="form-control"
+								id="endValue"
+								name="endValue"
+							/>
+						</div>
+						<div class="col-12 text-end mt-3">
+							<button id="btnSubmit" class="btn btn-dark" type="button">Display the Hundo!</button>
+						</div>
+					</form>
+				</div>
+				<div class="col">
+					<table class="table table-striped">
+						<tbody id="results"></tbody>
+					</table>
+				</div>
+			</div>
 		</main>
 
 		<footer class="py-3 container-fluid">
