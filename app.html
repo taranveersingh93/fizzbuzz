@@ -90,36 +90,47 @@
 			</div>
 			<h2 class="border-bottom border-2 mt-3 lead text-center">Enter your values below</h2>
 			<div class="row">
-				<div class="col">
+				<div class="col-12">
 					<form action="#" class="row g3">
-						<div class="col">
-							<label for="startValue" class="form-label">Start value</label>
+						<div class="col col-md-3">
+							<label for="stopValue" class="form-label">Stop value</label>
 							<input
 								type="number"
-								placeholder="start number"
-								value="0"
-								class="form-control"
-								id="startValue"
-								name="startValue"
-							/>
-						</div>
-						<div class="col">
-							<label for="endValue" class="form-label">End value</label>
-							<input
-								type="number"
-								placeholder="end number"
+								placeholder="Stop value"
 								value="100"
 								class="form-control"
-								id="endValue"
-								name="endValue"
+								id="stopValue"
+								name="stopValue"
 							/>
 						</div>
-						<div class="col-12 text-end mt-3">
-							<button id="btnSubmit" class="btn btn-dark" type="button">Display the Hundo!</button>
+						<div class="col col-md-3">
+							<label for="fizzValue" class="form-label">Fizz value</label>
+							<input
+								type="number"
+								placeholder="Fizz value"
+								value="3"
+								class="form-control"
+								id="fizzValue"
+								name="fizzValue"
+							/>
+						</div>
+						<div class="col col-md-3">
+							<label for="buzzValue" class="form-label">Buzz value</label>
+							<input
+								type="number"
+								placeholder="Buzz value"
+								value="3"
+								class="form-control"
+								id="buzzValue"
+								name="buzzValue"
+							/>
+						</div>
+						<div class="col-12 col-md-3 text-end d-flex flex-column align-items-center justify-content-end p-md-0 p-2">
+							<button id="btnSubmit" class="btn btn-dark" type="button">Generate numbers</button>
 						</div>
 					</form>
 				</div>
-				<div class="col">
+				<div class="col-12">
 					<table class="table table-striped">
 						<tbody id="results"></tbody>
 					</table>

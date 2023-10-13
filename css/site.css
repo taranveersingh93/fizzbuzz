@@ -61,6 +61,10 @@ footer .bi:hover {
     background: var(--ts-primary-color);
 }
 
+#btnSubmit {
+    width: 100%;
+}
+
 .btn-primary {
     --bs-btn-bg: var(--ts-primary-color);
     --bs-btn-border-color: var(--ts-primary-color);
@@ -95,8 +99,9 @@ footer .bi:hover {
  }
 
 @media (min-width: 768px) { 
-
-    
+    #btnSubmit {
+        width: 75%;
+    }
  }
 
 @media (min-width: 992px) { 
