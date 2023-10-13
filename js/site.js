@@ -1,20 +1,51 @@
-const displayError = () => {
+const displayError = (error) => {
     Swal.fire(
         {
             backdrop: false,
             title: 'Oh no',
-            text: "Please enter valid numbers",
+            text: error,
             icon: "error"
         }
     );
 }
 
-// stop point > fizzbuzz 
-// fizz and buzz not equal 
+const getFirstFizzBuzz = (fizz, buzz) => {
+    let smallerNum = buzz;
+    if (buzz > fizz) {
+        smallerNum = fizz;
+    }
 
+    for (let i = smallerNum; i <= fizz * buzz; i++) {
+        if (i % fizz === 0 && i % buzz === 0) {
+            return i;
+        }
+    }
+}
 
 const checkInputValidity = (stop, fizz, buzz) => {
-    return Number.isInteger(stop) && Number.isInteger(fizz) && Number.isInteger(buzz) && stop > 1;
+    const allNumbers = Number.isInteger(stop) && Number.isInteger(fizz) && Number.isInteger(buzz);
+    const firstFizzBuzz = getFirstFizzBuzz(fizz, buzz);
+    const minimumStop = stop >= firstFizzBuzz;
+    const positiveNums = fizz > 0 && buzz > 0;
+    const uniqueNums = fizz !== buzz;
+
+    if (!allNumbers) {
+        displayError("Please enter numerical values.");
+    }
+
+    if (!minimumStop) {
+        displayError(`The stop value should atleast be ${firstFizzBuzz}`);
+    } 
+
+    if (!positiveNums) {
+        displayError("The Fizz and Buzz value have to be greater than 0.");
+    }
+
+    if (!uniqueNums) {
+        displayError("Please enter different fizz and buzz values.")
+    }
+
+    return  allNumbers && minimumStop && positiveNums && uniqueNums;
 }
 
 const getValues = () => {
@@ -33,8 +64,6 @@ const getValues = () => {
         }
 
         displayFizzBuzz(generatedFizzBuzz, rowLength);
-    } else {
-        displayError();
     }
 }
 
