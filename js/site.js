@@ -125,8 +125,12 @@ const getValues = () => {
     }
 }
 
-const displayFizzBuzz = (listFizzBuzz, rowLength) => {
+const displayFizzBuzz = (listFizzBuzz, length) => {
     let html = '';
+    let rowLength = length;
+    if (rowLength > 5) {
+        rowLength = 5;
+    }
     for (let i = 0; i < listFizzBuzz.length; i++) {
         if (i % rowLength === 0) {
             html += '<tr>';
