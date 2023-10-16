@@ -102,7 +102,8 @@ const displayError = (error) => {
 			backdrop: false,
 			title: 'Oh no',
 			text: error,
-			icon: "error"
+			icon: "error",
+			confirmButtonColor: "#ff993b"
 		}
 	);
 }
@@ -156,13 +157,33 @@ const generateFizzBuzz = (stop, fizz, buzz) => {
 	return output;
 }
 
+// Recursion alternative
+
+// const generateFizzBuzz = (stop, fizz, buzz, i) => {
+//     if (i > stop) {
+//         return [];
+//     }
+//     let currentEntry;
+//         if (i % fizz === 0 && i % buzz === 0) {
+//             currentEntry = "FizzBuzz";
+//         } else if (i % fizz === 0) {
+//             currentEntry = "Fizz";
+//         } else if (i % buzz === 0) {
+//             currentEntry = "Buzz";
+//         } else {
+//             currentEntry = i;
+//         }
+	
+//     return [currentEntry, ...generateFizzBuzz(stop, fizz, buzz, i + 1)];
+// }
+
 const getValues = () => {
 	const stopValue = parseInt(document.getElementById('stopValue').value);
 	const fizzValue = parseInt(document.getElementById('fizzValue').value);
 	const buzzValue = parseInt(document.getElementById('buzzValue').value);
 
 	if (checkInputValidity(stopValue, fizzValue, buzzValue)) {  
-		const generatedFizzBuzz = generateFizzBuzz(stopValue, fizzValue, buzzValue);
+		const generatedFizzBuzz = generateFizzBuzz(stopValue, fizzValue, buzzValue, 1);
 		let rowLength;
 
 		if (fizzValue > buzzValue) {
@@ -175,8 +196,12 @@ const getValues = () => {
 	}
 }
 
-const displayFizzBuzz = (listFizzBuzz, rowLength) => {
+const displayFizzBuzz = (listFizzBuzz, length) => {
 	let html = '';
+	let rowLength = length;
+	if (rowLength > 5) {
+		rowLength = 5;
+	}
 	for (let i = 0; i < listFizzBuzz.length; i++) {
 		if (i % rowLength === 0) {
 			html += '&lttr&gt';
@@ -185,7 +210,7 @@ const displayFizzBuzz = (listFizzBuzz, rowLength) => {
 		const tableData = listFizzBuzz[i];
 		const className = getClass(tableData);
 		
-		html += `&lttd class="${className}"&gt${tableData}&lt/td&gt`
+		html += `&lttd style="width: ${100/rowLength}%" class="${className}"&gt${tableData}&lt/td&gt`
 		
 		if (i % rowLength === rowLength - 1) {
 			html += '&lt/tr&gt';
@@ -200,8 +225,58 @@ const displayFizzBuzz = (listFizzBuzz, rowLength) => {
 					</pre>
 				</div>
 				<div class="col-12 col-lg-4">
-					<p>The code is structured in one function <code>displayMessage</code>.</p>
-					<p><code>displayMessage</code> displayes a sweetAlert when the button is pressed.</p>
+					<p class="display-6 text-deco">How I processed the input values</p>
+					<p>The entry function of the app is <code>getValues</code>.</p>
+					<p>
+						In other words, that's the function which gets triggered when user clicks the
+						<code>Generate numbers</code> button.
+					</p>
+					<p>
+						This function gets the values of the relevant input fields from the DOM. It then calls the
+						<code>checkInputValidity</code> function with the input values as the arguments. The rest of the code is
+						only executed if the <code>checkInputValidity</code> returns <code>true</code>.
+					</p>
+					<p>
+						The <code>checkInputValidity</code> function checks for whether:
+						<ul>
+							<li>
+								All inputs are numbers.
+							</li>
+							<li>
+								The stop value is at least equal to the first fizzbuzz value.
+							</li>
+							<li>
+								The fizz value and buzz value are positive and unique.
+							</li>
+						</ul>
+						If any of those conditions are not met, an error alert is generated using a dynamic <code>displayError</code> function.
+					</p>
+
+					<p>If <code>checkInputValidity</code> returns <code>true</code>, It calls the <code>generateFizzBuzz</code> and the <code>displayFizzBuzz</code>function.</p>
+					<p class="display-6">How I replaced the selected values with relevant terms</p>
+					<p>
+						The <code>getValues</code> function calls the <code>generateFizzBuzz</code> function with the arguments of <code>stopValue, fizzValue and buzzValue</code>.
+						The <code>generateFizzBuzz</code> function loops from <code>1</code> to <code>stopValue</code> and relies on an if/else-if condition tree. The way javascript treats if/else-if is that it checks for the first condition that holds true. If the condition is true, javascrpt executes the enclosed codeblock and does not check the next conditions anyway.
+						As a result of this behavior, we have to check for the most specific condition first and only if it's false, should we move to the broader conditions.
+					</p>
+					<p>Applying this to our use case, <code>fizzbuzz</code> is the most specific condition in that it requires a number to be divisible by 2 different numbers <code>fizzValue</code> and <code>buzzValue</code>.</p>
+					<p>We have that specific condition on line 76. If that condition is true, we push <code>FizzBuzz</code> to an empty array called <code>output</code>.</p>
+					<p>If that condition is false, we check the other conditions of <code>fizz</code> and <code>buzz</code>. If either of the two are true, we push the corresponding string to the <code>output</code> array. If these conditions are false too, we execute the <code>else</code> code block which is a catch-all code  block, executed if all prior conditions are false.</p>
+					<p>In my case, that <code>else</code> code-block pushes the number to the <code>output</code> array.</p>
+					<p>To summarize, we check for any matching conditions of the number being divisible by the calculated <code>fizzbuzz</code> value, the specified <code>fizz</code> and <code>buzz</code> values. If any is true, we push the corresponding string to the <code>output</code> array. If none of the conditions are true, we push the number to the array.</p>
+					<p>At this point, we have just the data we need in the right order.</p>
+					<p class="display-6">How I displayed the values.</p>
+					<p>In the <code>generateFizzBuzz</code> function, we got the right data but we still need to plug that data back to the DOM for the user to be able to consume the data. The function that takes care of the same is <code>displayFizzBuzz</code>. It uses 2 parameters. One is the array of FizzBuzz items <code>listFizzBuzz</code> and <code>length</code> that we use to style our table.</p>
+					<p>I initialized a variable <code>html</code> with the intention to store the desired HTML in this variable.</p>
+					<p>I initialized a <code>rowLength</code> variable which is equal to the parameter <code>length</code> only upto a max value of 5. This will be the maximum number of columns in our table.</p>
+					<p>Now that I had something to begin with, I looped through the array <code>listFizzBuzz</code>. Since I had to add the data into a table row, I had to add logic for when to add the opening <code>&lttr&gt</code> and the closing <code>&lt/tr&gt</code> tags.</p>
+					<p>Let's visualize the tag logic. If the <code>rowLength</code> is 5, we would want the <code>&lttr&gt</code> tag just before the first, sixth, eleventh item and so on. Or, the elements at index position 0, 5, 10. The pattern is easy to see with the index position. It has to be a multiple of <code>rowLength</code>.</p>
+					<p>Similarly, the logic for the closing <code>&lt/tr&gt</code> tag is if the index position of the iterated item in the loop, when divided by <code>rowLength</code>, gives us <code>rowLength-1.</code></p>
+					<p>I used helper functions <code>getClass</code> and <code>removeLogo</code>. The <code>getClass</code> gives us the pre conditioned class string that we assign to the <code>&lttd&gt</code> item. The <code>removeLogo</code> function removes the logo from the table element when the user generates the numbers.</p>
+					<p>On line 142, we convert our data to html tags and add it to the <code>html</code> variable.</p>
+					<p>Finally, just to place the last piece of the puzzle, I used the <code>innerHTML</code> method to add the <code>html</code> variable's code back into the DOM. This connects everything together and makes for a quick cycle of user interaction triggering a javascript function which processes some user input data, and finally manipulates the DOM again so that the user can visually see the same.</p>
+		
+
 				</div>
 			</div>
 		</main>
