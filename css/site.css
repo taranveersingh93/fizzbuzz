@@ -108,6 +108,10 @@ footer .bi:hover {
     --bs-btn-hover-bg: #ff993b;
   }
 
+  .navbar-nav {
+    --bs-nav-link-hover-color: white;
+}
+
   .instructions-btn, .instructionsBox {
     width: 100%;
   }
