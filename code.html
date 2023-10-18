@@ -225,7 +225,28 @@ const displayFizzBuzz = (listFizzBuzz, length) => {
 					</pre>
 				</div>
 				<div class="col-12 col-lg-4">
-					<p class="display-6">How I processed the input values</p>
+					<p class="display-6 text-center">Abstract</p>
+					<p>My break down for this app's functionality was:</p>
+					<ul>
+						<li>Get the user input values.</li>
+						<li>Display a helpful error handling message if input is invalid.</li>
+						<li>If the input is indeed valid, generate all the numbers from 1 to <code>stopValue</code></li>
+						<li>Go through this "list" of numbers, and evaluate each number against some conditions.</li>
+						<li>
+							<strong>Check for the most specific condition first, because of how Javascript treats conditions.</strong>
+						</li>
+						<li>Upon any condition being true, replace the value with the corresponding string.</li>
+						<li>Use this data to display a table of values.</li>
+						<li>
+							The table's number of columns should be equal to the largest between <code>fizz</code> value,
+							<code>buzz</code> value and <code>5</code>.
+						</li>
+						<li>
+							Add different CSS classes to table data to ensure visual distinction between <code>fizz</code>,
+							<code>buzz</code> and <code>fizzbuzz</code>.
+						</li>
+					</ul>
+					<p class="display-6 text-center">How I processed the input values</p>
 					<p>The entry function of the app is <code>getValues</code>.</p>
 					<p>
 						In other words, that's the function which gets triggered when user clicks the
@@ -251,7 +272,7 @@ const displayFizzBuzz = (listFizzBuzz, length) => {
 						If <code>checkInputValidity</code> returns <code>true</code>, It calls the <code>generateFizzBuzz</code> and
 						the <code>displayFizzBuzz</code>function.
 					</p>
-					<p class="display-6">How I replaced the selected values with relevant terms</p>
+					<p class="display-6 text-center">How I replaced the selected values with relevant terms</p>
 					<p>
 						The <code>getValues</code> function calls the <code>generateFizzBuzz</code> function with the arguments of
 						<code>stopValue, fizzValue and buzzValue</code>. The <code>generateFizzBuzz</code> function loops from
@@ -283,7 +304,7 @@ const displayFizzBuzz = (listFizzBuzz, length) => {
 						push the number to the array.
 					</p>
 					<p>At this point, we have just the data we need in the right order.</p>
-					<p class="display-6">How I displayed the values.</p>
+					<p class="display-6 text-center">How I displayed the values.</p>
 					<p>
 						In the <code>generateFizzBuzz</code> function, we got the right data but we still need to plug that data
 						back to the DOM for the user to be able to consume the data. The function that takes care of the same is
@@ -324,6 +345,19 @@ const displayFizzBuzz = (listFizzBuzz, length) => {
 						<code>html</code> variable's code back into the DOM. This connects everything together and makes for a quick
 						cycle of user interaction triggering a javascript function which processes some user input data, and finally
 						manipulates the DOM again so that the user can visually see the same.
+					</p>
+					<p class="display-6 text-center">An alternative approach</p>
+					<p>
+						(line 91) Instead of a for loop for the iterations, I could've also used recursion. The way I'd give a loop
+						an end constraint like <code>i < input.length</code>, I could give a base state to the recursive function
+						like <code><br />if (i > stop) <br />{ return [] }</code>.<br />
+						The way I'd tell a loop to increment <code>i++</code>, I'd give a carry state to the recursive function
+						like<br />
+						<code>return [currentEntry, ...generateFizzBuzz(stop, fizz, buzz, i + 1)]</code>. The key is to return
+						another function invocation with an incremented argument <code>i + 1</code> and also having an early return
+						in one condition. Without the early return, the callstack would get stuck in an endless loop. Meaning, every
+						function would call another function and there won't be an end to this. The program could freeze or give you
+						an error.
 					</p>
 				</div>
 			</div>
