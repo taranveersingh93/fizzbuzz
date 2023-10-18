@@ -6,6 +6,7 @@
     --ts-primary-color: hsl(210, 17%, 18%);
     --ts-secondary-color: hsl(210, 17%, 95%);
     --ts-tertiary-color: hsl(210, 17%, 30%);
+    --ts-accent-color: #4b1e3d;
 }
 
 html, body {
@@ -28,7 +29,7 @@ footer {
 }
 
 footer, nav.navbar {
-    background-color: var(--ts-primary-color);
+    background-color: var(--ts-accent-color);
     color: var(--ts-light-color);
 }
 
@@ -82,7 +83,7 @@ footer .bi:hover {
 } */
 
 .btn-primary {
-    --bs-btn-bg: var(--ts-primary-color);
+    --bs-btn-bg: var(--ts-accent-color);
     --bs-btn-border-color: var(--ts-primary-color);
     --bs-btn-hover-bg: var(--ts-tertiary-color);
     --bs-btn-hover-border-color: var(--ts-tertiary-color);
@@ -103,6 +104,7 @@ footer .bi:hover {
   }
 
   .btn-dark {
+    --bs-btn-bg: var(--ts-accent-color);
     --bs-btn-hover-bg: #ff993b;
   }
 
